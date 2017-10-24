@@ -17,3 +17,12 @@ class TestMyattr:
 
         A = foo()
         assert 'bar' in foo.__dict__
+
+
+    def test_val(self):
+        @my_attr.s
+        class foo(object):
+            bar = my_attr.ib(5)
+
+        A = foo()
+        assert A.bar == 5

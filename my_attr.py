@@ -22,25 +22,3 @@ class my_attr:
     @staticmethod
     def ib(val = None):
         return foowrap(val)
-
-@my_attr.s
-class foo(object):
-    aaa = my_attr.ib()
-    bbb = my_attr.ib(3)
-
-@my_attr.s
-class bar(object):
-    a = my_attr.ib()
-    b = my_attr.ib(5)
-
-
-A = foo()
-print A.aaa
-print A.bbb
-
-print '..'
-
-B = bar()
-print B.a
-print B.b
-#print B.aaa
