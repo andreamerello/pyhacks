@@ -106,3 +106,16 @@ class TestMyattr:
         assert p.z == 1
         assert p.y == 2
         assert p.x == 3
+
+    @pytest.mark.xfail
+    def test_arbitrary_default_value(self):
+        # this is a bit hard, but with enough effort you can probably do
+        sentinel = object()
+
+        @my_attr.s
+        class Foo(object):
+            x = my_attr.ib(default=sentinel)
+
+        f = Foo()
+        assert f.x is sentinel
+    

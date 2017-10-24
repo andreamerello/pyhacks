@@ -40,6 +40,8 @@ class my_attr:
                     # You already know about this: what if I want to use None
                     # as a default value?
                     if obj.val is not None:
+                        # no, str() is NOT ok. See also
+                        # test_arbitrary_default_value
                         sign_str += "=" + str(obj.val) # is str() ok ?
                     assign_str += '    self.' + attr + ' = ' + attr + '\n'
             if assign_str == '':
