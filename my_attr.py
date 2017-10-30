@@ -15,7 +15,7 @@ class my_attr:
     def s(cls):
         def put_init():
             coma = '' # never used
-            sign_str = ''
+            _sign_str = []
             assign_str = ''
             # it is debatable whether it is better to use dir or
             # cls.__dict__.items(). The main difference is that dir()
@@ -33,17 +33,20 @@ class my_attr:
                     #     names.append('x')
                     #     names.append('y')
                     #     ', '.join(names)
-                    sign_str += ', ' + attr
+                    _sign_str.append(', ')
+                    _sign_str.append(attr)
                     #
                     # You already know about this: what if I want to use None
                     # as a default value?
                     if obj.val is not None:
+                        _sign_str.append('=')
                         # no, str() is NOT ok. See also
                         # test_arbitrary_default_value
-                        sign_str += "=" + str(obj.val) # is str() ok ?
+                        _sign_str.append(str(obj.val))
                     assign_str += '    self.' + attr + ' = ' + attr + '\n'
             if assign_str == '':
                 assign_str = '    pass'
+            sign_str = "".join(_sign_str)
             magic_str = 'def magic_wand(self' + sign_str + '):\n' + assign_str
             print magic_str
             exec magic_str in globals(), locals()
