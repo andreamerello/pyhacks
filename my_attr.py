@@ -52,7 +52,12 @@ class my_attr:
             if assign_str == '':
                 assign_str = '    pass'
             sign_str = "".join(_sign_str)
-            magic_str = 'def magic_wand(self' + sign_str + '):\n' + assign_str
+            _magic_str = []
+            _magic_str.append('def magic_wand(self')
+            _magic_str.append(sign_str)
+            _magic_str.append('):\n')
+            _magic_str.append(assign_str)
+            magic_str = "".join(_magic_str)
             print magic_str
             exec magic_str in globals(), locals()
             cls.__init__ = magic_wand
