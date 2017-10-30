@@ -13,7 +13,6 @@ class my_attr:
 
     @staticmethod
     def s(cls):
-        coma = '' # never used
         _sign_str = []
         _assign_str = []
         # it is debatable whether it is better to use dir or
