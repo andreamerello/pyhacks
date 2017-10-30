@@ -60,13 +60,3 @@ class my_attr:
     @staticmethod
     def ib(val = None):
         return foowrap(val)
-
-
-# it seems that while developing, you tested your code by running
-# "./my_attr.py": WRONG WRONG WRONG! Why didn't you just write a test and used
-# py.test to run it?
-@my_attr.s
-class foo(object):
-    bar = my_attr.ib(5)
-
-A = foo(5)
