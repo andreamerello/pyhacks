@@ -9,15 +9,12 @@ class TestMyattr:
         foo2 = my_attr.s(foo)
         assert foo is foo2
 
-    def test_adding_field_do_really_add_it(self):
+    def test_adding_field_do_really_add_it_regardless_its_value(self):
         @my_attr.s
         class foo(object):
             bar = my_attr.ib()
 
         foo_obj = foo(None)
-        # what are you testing here? If you are testing that the __init__
-        # works correctly, it is basically the same test as test_val: "assert
-        # A.bar is None" is better than this assert here
         assert 'bar' in foo.__dict__
 
     def test_added_field_gets_val_passed_to_ctor(self):
