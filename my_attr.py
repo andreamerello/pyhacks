@@ -53,21 +53,15 @@ class my_attr:
                 assign_str = '    pass'
             sign_str = "".join(_sign_str)
             _magic_str = []
-            _magic_str.append('def magic_wand(self')
+            _magic_str.append('def __init__(self')
             _magic_str.append(sign_str)
             _magic_str.append('):\n')
             _magic_str.append(assign_str)
             magic_str = "".join(_magic_str)
-            print magic_str
-            exec magic_str in globals(), locals()
-            cls.__init__ = magic_wand
-            # the lines above are a bit ugly; moreover, cls.__init__.__name__
-            # == 'magic_wand', which is a bit weird. Suggestion:
-            #
-            # code = "def __init__(self): pass"
-            # d = {}
-            # exec code in d
-            # cls.__init__ = d['__init__']
+
+            context = {}
+            exec magic_str in context
+            cls.__init__ = context['__init__']
             return cls
 
         # what's the point of defining a function which is called only once
