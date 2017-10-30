@@ -24,6 +24,7 @@ class my_attr:
             for attr in dir(cls):
                 obj = getattr(cls, attr)
                 # better to use isinstance(obj, foowrap)
+                ## Why? do we need hineritance somehow ?
                 if type(obj) is foowrap:
                     # this is no Pythonic at all. Moreover, concatenating
                     # strings like this is O(n**2). Much better to do
