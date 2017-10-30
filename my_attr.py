@@ -1,9 +1,6 @@
 #!/usr/bin/python
 
-# classes are usually CamelCase in Python
-#
-# this name is horrible. Moreover, see comments on ib() below
-class foowrap(object):
+class ObjectTypeWrapper(object):
     def __init__(self, val):
         self.val = val
 
@@ -23,7 +20,7 @@ class my_attr:
             obj = getattr(cls, attr)
             # better to use isinstance(obj, foowrap)
             ## Why? do we need hineritance somehow ?
-            if type(obj) is foowrap:
+            if type(obj) is ObjectTypeWrapper:
                 _sign_str.append(', ')
                 _sign_str.append(attr)
                 #
@@ -59,4 +56,4 @@ class my_attr:
     # class? You could simply use a class directly
     @staticmethod
     def ib(val = None):
-        return foowrap(val)
+        return ObjectTypeWrapper(val)
