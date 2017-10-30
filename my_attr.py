@@ -24,13 +24,6 @@ class my_attr:
             # better to use isinstance(obj, foowrap)
             ## Why? do we need hineritance somehow ?
             if type(obj) is foowrap:
-                # this is no Pythonic at all. Moreover, concatenating
-                # strings like this is O(n**2). Much better to do
-                # something like:
-                #     names = []
-                #     names.append('x')
-                #     names.append('y')
-                #     ', '.join(names)
                 _sign_str.append(', ')
                 _sign_str.append(attr)
                 #
