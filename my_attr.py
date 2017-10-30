@@ -11,21 +11,18 @@ class foowrap(object):
 # "import attr; @attr.s", NOT "from attr import attr".
 class my_attr:
 
-    # WTF? The argument you receive is a class, not a class decorator. So,
-    # just use 'cls' as a name. And no, don't tell me that you meant "class
-    # decorated" (it is counter-intuitive, and wrong english :-P)
     @staticmethod
-    def s(cls_deco):
+    def s(cls):
         def put_init():
             coma = '' # never used
             sign_str = ''
             assign_str = ''
             # it is debatable whether it is better to use dir or
-            # cls_deco.__dict__.items(). The main difference is that dir()
+            # cls.__dict__.items(). The main difference is that dir()
             # also looks inside superclasses, which might (or not) be what you
             # want.
-            for attr in dir(cls_deco):
-                obj = getattr(cls_deco, attr)
+            for attr in dir(cls):
+                obj = getattr(cls, attr)
                 # better to use isinstance(obj, foowrap)
                 if type(obj) is foowrap:
                     # this is no Pythonic at all. Moreover, concatenating
@@ -49,15 +46,15 @@ class my_attr:
             magic_str = 'def magic_wand(self' + sign_str + '):\n' + assign_str
             print magic_str
             exec magic_str in globals(), locals()
-            cls_deco.__init__ = magic_wand
+            cls.__init__ = magic_wand
             # the lines above are a bit ugly; moreover, cls.__init__.__name__
             # == 'magic_wand', which is a bit weird. Suggestion:
             #
             # code = "def __init__(self): pass"
             # d = {}
             # exec code in d
-            # cls_deco.__init__ = d['__init__']
-            return cls_deco
+            # cls.__init__ = d['__init__']
+            return cls
 
         # what's the point of defining a function which is called only once
         # and immediately? You could just do the work inside "s", and be
@@ -79,4 +76,3 @@ class foo(object):
     bar = my_attr.ib(5)
 
 A = foo(5)
-
