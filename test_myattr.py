@@ -2,18 +2,14 @@ import pytest
 from my_attr import my_attr
 
 class TestMyattr:
-    def test_decorator(self):
+    def test_decorator_returns_same_instance_of_original_class(self):
         class foo(object):
             pass
 
         foo2 = my_attr.s(foo)
         assert foo is foo2
 
-    # general rule: test names should be self descriptive. Here, it's not
-    # really clear what are you testing; "add" what? For an example of
-    # long&descriptive name :)
-    # https://bitbucket.org/pypy/pypy/src/1c3af3c4a0958c4cf5b1197418659829d73a06d2/rpython/jit/metainterp/optimizeopt/test/test_optimizebasic.py?at=default&fileviewer=file-view-default#test_optimizebasic.py-598
-    def test_add(self):
+    def test_adding_field_do_really_add_it(self):
         @my_attr.s
         class foo(object):
             bar = my_attr.ib()
@@ -24,7 +20,7 @@ class TestMyattr:
         # A.bar is None" is better than this assert here
         assert 'bar' in foo.__dict__
 
-    def test_val(self):
+    def test_added_field_gets_val_passed_to_ctor(self):
         @my_attr.s
         class foo(object):
             bar = my_attr.ib()
@@ -32,7 +28,7 @@ class TestMyattr:
         foo_obj = foo(bar = 5)
         assert foo_obj.bar == 5
 
-    def test_def_val(self):
+    def test_added_field_assumes_default_val_when_val_not_specified_in_ctor(self):
         @my_attr.s
         class foo(object):
             bar = my_attr.ib(3)
