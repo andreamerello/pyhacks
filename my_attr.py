@@ -16,7 +16,7 @@ class my_attr:
         def put_init():
             coma = '' # never used
             _sign_str = []
-            assign_str = ''
+            _assign_str = []
             # it is debatable whether it is better to use dir or
             # cls.__dict__.items(). The main difference is that dir()
             # also looks inside superclasses, which might (or not) be what you
@@ -43,7 +43,12 @@ class my_attr:
                         # no, str() is NOT ok. See also
                         # test_arbitrary_default_value
                         _sign_str.append(str(obj.val))
-                    assign_str += '    self.' + attr + ' = ' + attr + '\n'
+                    _assign_str.append('    self.')
+                    _assign_str.append(attr)
+                    _assign_str.append(' = ')
+                    _assign_str.append(attr)
+                    _assign_str.append('\n')
+            assign_str = "".join(_assign_str)
             if assign_str == '':
                 assign_str = '    pass'
             sign_str = "".join(_sign_str)
