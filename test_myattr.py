@@ -3,18 +3,6 @@ from my_attr import my_attr
 
 class TestMyattr:
     def test_decorator(self):
-        @my_attr.s
-        class foo(object):
-            a = 'bar'
-
-        foo_obj = foo()
-        # I am not sure to understand what you want to test here. Let me
-        # guess: you want to check that "A" is an instance of foo (and thus
-        # has the "a" attribute). See test_decorator_2 for how I would test
-        # it.
-        assert foo_obj.a == 'bar'
-
-    def test_decorator_2(self):
         class foo(object):
             pass
 
